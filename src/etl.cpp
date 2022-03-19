@@ -51,5 +51,11 @@ auto ETL::Std(Eigen::MatrixXd data) -> decltype(((data.array().square().colwise(
 
 Eigen::MatrixXd ETL::Normalize(Eigen::MatrixXd data){
     auto mean= Mean(data);
+    Eigen::MatrixXd scaled_data= data.rowwise() - mean;
+    auto std = Std(scaled_data);
+
+    Eigen::MatrixXd norm = scaled_data.array().rowwise()/std;
+
+    return norm;
     
 }
