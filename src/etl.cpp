@@ -56,6 +56,25 @@ Eigen::MatrixXd ETL::Normalize(Eigen::MatrixXd data){
 
     Eigen::MatrixXd norm = scaled_data.array().rowwise()/std;
 
-    return norm;
-    
+    return norm;   
+}
+
+std::tuple<Eigen::MatrixXd,Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> ETL::TrainTestSplit(Eigen::MatrixXd data, float train_size){
+    int rows= data.rows();
+    int train_rows= round(train_size * rows);
+    int test_rows= rows - train_rows;
+
+    Eigen::MatrixXd train = data.topRows(train_rows);
+
+    Eigen::MatrixXd X_train= train.leftCols(data.cols()-1);
+    Eigen::MatrixXd y_train= train.rightCols(1);
+
+    Eigen::MatrixXd test= data.bottomRows(test_rows);
+
+    Eigen::MatrixXd X_test= test.leftCols(data.cols()-1);
+    Eigen::MatrixXd y_test= test.rightCols(1);
+
+    return std::make_tuple(X_train, y_train, X_test, y_test);
+
+
 }
