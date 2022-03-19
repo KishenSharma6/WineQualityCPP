@@ -11,7 +11,15 @@ int main(int argc, char *argv[])
 {
     ETL etl(argv[1], argv[2], argv[3]);
 
-    std::vector<std::vector<std::string> > dataset = etl.readCSV();
+    std::vector<std::vector<std::string>> dataset = etl.readCSV();
 
+    int rows = dataset.size();
+    int cols= dataset[0].size();
+
+    Eigen::MatrixXd datamat= etl.CSVtoEigen(dataset, rows, cols);
+
+    Eigen::MatrixXd normalized_mat = etl.Normalize(datamat);
+
+    std::cout << normalized_mat << std::endl;
     return EXIT_SUCCESS;
 }
