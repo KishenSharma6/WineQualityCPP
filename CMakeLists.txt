@@ -4,11 +4,15 @@ project(Wine VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 11)
 
 include_directories(headers)
+link_directories("/opt/homebrew/lib")
+include_directories("/opt/homebrew/include")
 
 set(SOURCES src/main.cpp
             src/etl.cpp
             headers/etl.h
-            /opt/homebrew/Cellar/boost/1.78.0_1/include/boost/algorithm/string.hpp)
+            src/linearRegression.cpp
+            headers/linearRegression.h
+            /opt/homebrew/include/boost/algorithm/string.hpp)
 
 FIND_PACKAGE(Boost)
 IF (Boost_FOUND)

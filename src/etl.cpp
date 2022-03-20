@@ -3,8 +3,8 @@
 #include <vector>
 #include <stdlib.h>
 #include <cmath>
-#include </opt/homebrew/Cellar/boost/1.78.0_1/include/boost/algorithm/string.hpp>
-#include </opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/Dense>
+#include </opt/homebrew/include/boost/algorithm/string.hpp>
+#include </opt/homebrew/include/eigen3/Eigen/Dense>
 
 
 std::vector<std::vector<std::string>> ETL::readCSV()
@@ -77,4 +77,17 @@ std::tuple<Eigen::MatrixXd,Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> ET
     return std::make_tuple(X_train, y_train, X_test, y_test);
 
 
+}
+
+void ETL::Vectortofile(std::vector<float> vector, std::string filename){
+    std::ofstream output_file(filename);
+    std::ostream_iterator<float> output_iterator(output_file, "\n");
+    std::copy(vector.begin(), vector.end(), output_iterator);
+}
+
+void ETL::EigentoFile(Eigen::MatrixXd data, std::string filename){
+    std::ofstream output_file(filename);
+    if(output_file.is_open()){
+        output_file << data << "\n";
+    }
 }
