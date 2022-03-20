@@ -3,8 +3,7 @@
 
 #include <iostream>
 #include <fstream>
-#include </opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/Dense>
-
+#include </opt/homebrew/include/eigen3/Eigen/Dense>
 class ETL
 {
     std::string dataset;
@@ -23,6 +22,10 @@ public:
 
     Eigen::MatrixXd Normalize(Eigen::MatrixXd raw_data);
     std::tuple<Eigen::MatrixXd,Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> TrainTestSplit(Eigen::MatrixXd data, float train_size);
+    void Vectortofile(std::vector<float> vector, std::string filename);
+    void EigentoFile(Eigen::MatrixXd data, std::string filename);
+
+
 };
 
 #endif
