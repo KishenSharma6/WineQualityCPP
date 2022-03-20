@@ -32,3 +32,10 @@ std::tuple<Eigen::VectorXd, std::vector<float>> LinearRegression::GradientDescen
     }
     return std::make_tuple(theta, cost);
 }
+
+float LinearRegression::RSquared(Eigen::MatrixXd y, Eigen::MatrixXd y_hat){
+    auto num = pow((y-y_hat).array(),2).sum();
+    auto den = pow(y.array()-y.mean(),2).sum();
+
+    return 1 - num/den;
+}
